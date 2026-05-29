@@ -1,19 +1,51 @@
-import { defineNuxtModule, addPlugin, createResolver } from '@nuxt/kit'
+import {
+  defineNuxtModule,
+  addServerPlugin,
+  addServerHandler,
+  createResolver,
+} from "nuxt/kit";
 
-// Module options TypeScript interface definition
-export interface ModuleOptions {}
+export interface ModuleOptions {
+  enabled?: boolean;
+  logLevel?: "debug" | "info" | "warn" | "error";
+  sampleRate?: number;
+  excludePaths?: string[];
+  apiTimeout?: number;
+}
 
 export default defineNuxtModule<ModuleOptions>({
   meta: {
-    name: 'my-module',
-    configKey: 'myModule',
+    name: "nuxt-server-log",
   },
-  // Default configuration options of the Nuxt module
-  defaults: {},
-  setup(_options, _nuxt) {
-    const resolver = createResolver(import.meta.url)
+  defaults: {
+    enabled: true,
+    logLevel: "info",
+    sampleRate: 1,
+    excludePaths: ["/__nuxt_error"],
+    apiTimeout: 5000,
+  },
+  setup(options, nuxt) {
+    if (!options.enabled) return;
 
-    // Do not add the extension since the `.ts` will be transpiled to `.mjs` after `npm run prepack`
-    addPlugin(resolver.resolve('./runtime/plugin'))
+    const resolver = createResolver(import.meta.url);
+
+    nuxt.options.runtimeConfig.logger = {
+      enabled: options.enabled ?? true,
+      logLevel: options.logLevel ?? "info",
+      sampleRate: options.sampleRate ?? 1,
+      excludePaths: options.excludePaths ?? ["/__nuxt_error"],
+      apiTimeout: options.apiTimeout ?? 5000,
+    };
+
+    addServerHandler({
+      middleware: true,
+      handler: resolver.resolve("./runtime/server/middleware/logger"),
+    });
+
+    addServerPlugin(
+      resolver.resolve("./runtime/server/plugins/apiInterceptor"),
+    );
+
+    addServerPlugin(resolver.resolve("./runtime/server/plugins/errorLogger"));
   },
-})
+});
