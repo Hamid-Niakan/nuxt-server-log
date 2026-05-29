@@ -16,6 +16,7 @@ export interface ModuleOptions {
 export default defineNuxtModule<ModuleOptions>({
   meta: {
     name: "nuxt-server-log",
+    configKey: "serverLog",
   },
   defaults: {
     enabled: true,
