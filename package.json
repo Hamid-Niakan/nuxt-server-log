@@ -1,8 +1,30 @@
 {
-  "name": "my-module",
-  "version": "1.0.0",
-  "description": "My new Nuxt module",
-  "repository": "your-org/my-module",
+  "name": "nuxt-server-log",
+  "version": "0.1.0",
+  "description": "A Nuxt module for structured server-side logging",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Hamid-Niakan/nuxt-server-log"
+  },
+  "packageManager": "npm@10.9.2",
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "author": {
+    "email": "hniakan@gmail.com",
+    "name": "Hamid Niakan"
+  },
+  "keywords": [
+    "nuxt",
+    "nuxt-module",
+    "logging",
+    "SSR",
+    "server"
+  ],
+  "homepage": "https://github.com/Hamid-Niakan/nuxt-server-log#readme",
+  "bugs": {
+    "url": "https://github.com/Hamid-Niakan/nuxt-server-log/issues"
+  },
   "license": "MIT",
   "type": "module",
   "exports": {
@@ -35,6 +57,9 @@
     "test": "vitest run",
     "test:watch": "vitest watch",
     "test:types": "vue-tsc --noEmit && cd playground && vue-tsc --noEmit"
+  },
+  "peerDependencies": {
+    "nuxt": "^4.0.0"
   },
   "dependencies": {
     "@nuxt/kit": "^4.4.5"
