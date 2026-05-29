@@ -1,5 +1,5 @@
-import { defineNitroPlugin } from "#build/types/nitro-imports";
 import { logger } from "../utils/logger";
+import { defineNitroPlugin } from "nitropack/runtime";
 
 export default defineNitroPlugin((nitroApp) => {
   nitroApp.hooks.hook("error", (error, event) => {

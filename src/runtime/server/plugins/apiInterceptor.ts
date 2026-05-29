@@ -1,6 +1,6 @@
-import { defineNitroPlugin } from "#build/types/nitro-imports";
 import { addApiCall } from "../utils/context";
 import type { ApiCall } from "../utils/context";
+import { defineNitroPlugin } from "nitropack/runtime";
 
 export default defineNitroPlugin(() => {
   const originalNativeFetch = globalThis.fetch;

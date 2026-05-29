@@ -8,7 +8,7 @@ import { requestContext } from "../utils/context";
 import { logger } from "../utils/logger";
 import { randomUUID } from "node:crypto";
 import type { RequestContext } from "../utils/context";
-import { useRuntimeConfig } from "nuxt/kit";
+import { useRuntimeConfig } from "#imports";
 
 export default defineEventHandler(async (event) => {
   const config = useRuntimeConfig().logger;
