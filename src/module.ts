@@ -28,6 +28,9 @@ export default defineNuxtModule<ModuleOptions>({
   meta: {
     name: "nuxt-server-log",
     configKey: "serverLog",
+    compatibility: {
+      nuxt: ">=3.16.0",
+    },
   },
   defaults: {
     enabled: true,
