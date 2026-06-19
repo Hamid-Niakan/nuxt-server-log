@@ -15,6 +15,7 @@ export interface ModuleOptions {
   responseDurationWarning?: number;
   remoteAddressHeader?: string;
   redactQueryKeys?: string[];
+  traceDepth?: number;
 }
 
 declare module "@nuxt/schema" {
@@ -46,6 +47,7 @@ export default defineNuxtModule<ModuleOptions>({
       "access_token",
       "refresh_token",
     ],
+    traceDepth: 10,
   },
   setup(options, nuxt) {
     if (!options.enabled) return;

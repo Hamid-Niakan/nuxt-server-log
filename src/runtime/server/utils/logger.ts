@@ -68,11 +68,14 @@ class Logger {
     action: ErrorLog["action"] = "unhandled",
   ) {
     if (this.shouldLog("error")) {
+      const config = useRuntimeConfig().logger as
+        | LoggerRuntimeConfig
+        | undefined;
       const errorLog: ErrorLog = {
         "@timestamp": new Date().toISOString(),
         error: error?.message || message,
         type: error?.name || "Error",
-        trace: parseStackTrace(error?.stack),
+        trace: parseStackTrace(error?.stack, config?.traceDepth),
         action,
         context: error?.cause ? { cause: error.cause } : undefined,
       };

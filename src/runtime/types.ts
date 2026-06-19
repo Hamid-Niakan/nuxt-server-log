@@ -7,4 +7,5 @@ export interface LoggerRuntimeConfig {
   responseDurationWarning: number;
   remoteAddressHeader?: string;
   redactQueryKeys: string[];
+  traceDepth: number;
 }
