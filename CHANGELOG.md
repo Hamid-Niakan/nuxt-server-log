@@ -1,8 +1,6 @@
 # Changelog
 
-
 ## v0.1.1
-
 
 ### 🚀 Enhancements
 
@@ -25,9 +23,8 @@
 
 ### ✅ Tests
 
-- Unit tests for helper functions and e2e test for requist id header ([4951e5c](https://github.com/Hamid-Niakan/nuxt-server-log/commit/4951e5c))
+- Unit tests for helper functions and e2e test for request id header ([4951e5c](https://github.com/Hamid-Niakan/nuxt-server-log/commit/4951e5c))
 
 ### ❤️ Contributors
 
 - Hamid Niakan <hniakan@gmail.com>
-
