@@ -1,4 +1,8 @@
-# Nuxt Server Log
+<p align="center">
+  <img src="./assets/logo.png" alt="Nuxt Server Log" width="140" height="140">
+</p>
+
+<h1 align="center">Nuxt Server Log</h1>
 
 [![npm version][npm-version-src]][npm-version-href]
 [![npm downloads][npm-downloads-src]][npm-downloads-href]
