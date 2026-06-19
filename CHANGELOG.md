@@ -1,5 +1,21 @@
 # Changelog
 
+## v0.1.2
+
+[compare changes](https://github.com/Hamid-Niakan/nuxt-server-log/compare/v0.1.1...v0.1.2)
+
+### 🩹 Fixes
+
+- Support Nuxt 3 (widen peer range) and relax node engines ([4b18698](https://github.com/Hamid-Niakan/nuxt-server-log/commit/4b18698))
+
+### 📖 Documentation
+
+- Tidy up changelog ([89c6dc5](https://github.com/Hamid-Niakan/nuxt-server-log/commit/89c6dc5))
+
+### ❤️ Contributors
+
+- Hamid Niakan <hniakan@gmail.com>
+
 ## v0.1.1
 
 ### 🚀 Enhancements

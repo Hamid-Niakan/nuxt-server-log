@@ -1,6 +1,6 @@
 {
   "name": "nuxt-server-log",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "A Nuxt module for structured server-side logging",
   "repository": {
     "type": "git",
