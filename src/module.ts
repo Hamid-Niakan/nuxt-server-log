@@ -4,13 +4,23 @@ import {
   addServerHandler,
   createResolver,
 } from "nuxt/kit";
+import type { LoggerRuntimeConfig } from "./runtime/types";
 
 export interface ModuleOptions {
   enabled?: boolean;
   logLevel?: "debug" | "info" | "warn" | "error";
   sampleRate?: number;
   excludePaths?: string[];
-  apiTimeout?: number;
+  apiDurationWarning?: number;
+  responseDurationWarning?: number;
+  remoteAddressHeader?: string;
+  redactQueryKeys?: string[];
+}
+
+declare module "@nuxt/schema" {
+  interface RuntimeConfig {
+    logger: LoggerRuntimeConfig;
+  }
 }
 
 export default defineNuxtModule<ModuleOptions>({
@@ -23,20 +33,26 @@ export default defineNuxtModule<ModuleOptions>({
     logLevel: "info",
     sampleRate: 1,
     excludePaths: ["/__nuxt_error"],
-    apiTimeout: 5000,
+    apiDurationWarning: 1500,
+    responseDurationWarning: 3000,
+    redactQueryKeys: [
+      "token",
+      "password",
+      "secret",
+      "apiKey",
+      "api_key",
+      "auth",
+      "authorization",
+      "access_token",
+      "refresh_token",
+    ],
   },
   setup(options, nuxt) {
     if (!options.enabled) return;
 
     const resolver = createResolver(import.meta.url);
 
-    nuxt.options.runtimeConfig.logger = {
-      enabled: options.enabled ?? true,
-      logLevel: options.logLevel ?? "info",
-      sampleRate: options.sampleRate ?? 1,
-      excludePaths: options.excludePaths ?? ["/__nuxt_error"],
-      apiTimeout: options.apiTimeout ?? 5000,
-    };
+    nuxt.options.runtimeConfig.logger = { ...options } as LoggerRuntimeConfig;
 
     addServerHandler({
       middleware: true,

@@ -2,7 +2,13 @@ import { addApiCall } from "../utils/context";
 import type { ApiCall } from "../utils/context";
 import { defineNitroPlugin } from "nitropack/runtime";
 
+const FETCH_PATCHED = Symbol.for("nuxt-server-log:fetch-patched");
+
 export default defineNitroPlugin(() => {
+  const globalScope = globalThis as Record<symbol, unknown>;
+  if (globalScope[FETCH_PATCHED]) return;
+  globalScope[FETCH_PATCHED] = true;
+
   const originalNativeFetch = globalThis.fetch;
 
   globalThis.fetch = new Proxy(originalNativeFetch, {
