@@ -1,5 +1,17 @@
 # Changelog
 
+## v0.1.3
+
+[compare changes](https://github.com/Hamid-Niakan/nuxt-server-log/compare/v0.1.2...v0.1.3)
+
+### 🚀 Enhancements
+
+- Expose logger as a server auto-import ([f92c8cb](https://github.com/Hamid-Niakan/nuxt-server-log/commit/f92c8cb))
+
+### ❤️ Contributors
+
+- Hamid Niakan <hniakan@gmail.com>
+
 ## v0.1.2
 
 [compare changes](https://github.com/Hamid-Niakan/nuxt-server-log/compare/v0.1.1...v0.1.2)
