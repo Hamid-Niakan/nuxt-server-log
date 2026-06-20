@@ -2,6 +2,7 @@ import {
   defineNuxtModule,
   addServerPlugin,
   addServerHandler,
+  addServerImports,
   createResolver,
 } from "nuxt/kit";
 import type { LoggerRuntimeConfig } from "./runtime/types";
@@ -69,5 +70,12 @@ export default defineNuxtModule<ModuleOptions>({
     );
 
     addServerPlugin(resolver.resolve("./runtime/server/plugins/errorLogger"));
+
+    addServerImports([
+      {
+        name: "logger",
+        from: resolver.resolve("./runtime/server/utils/logger"),
+      },
+    ]);
   },
 });

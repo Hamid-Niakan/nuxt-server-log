@@ -62,6 +62,53 @@ export default defineNuxtConfig({
 
 That's it. Requests are now logged to the server console as JSON. ✨
 
+## Using the logger
+
+Besides automatic per-request logging, the module exposes a `logger` you can use
+anywhere in your server code (API routes, server plugins, middleware, utilities)
+to emit your own structured log lines. Each entry is enriched with the active
+request's `requestId`, so your logs line up with the per-request log.
+
+The `logger` is **auto-imported** — just use it, no import needed:
+
+```ts
+// server/api/users.get.ts
+export default defineEventHandler(async () => {
+  logger.info("Fetching users");
+
+  try {
+    const users = await getUsers();
+    logger.debug("Users fetched", { count: users.length });
+    return users;
+  } catch (error) {
+    logger.error("Failed to fetch users", error as Error);
+    throw error;
+  }
+});
+```
+
+If you prefer an explicit import (or your editor's auto-import setup needs it),
+import it from `#imports`:
+
+```ts
+import { logger } from "#imports";
+```
+
+### Available methods
+
+```ts
+logger.debug(message: string, data?: Record<string, unknown>);
+logger.info(message: string, data?: Record<string, unknown>);
+logger.warn(message: string, data?: Record<string, unknown>);
+logger.error(message: string, error?: Error, data?: Record<string, unknown>);
+```
+
+- The optional `data` object is merged into the emitted JSON, so you can attach
+  any structured fields you like.
+- `logger.error` additionally captures the error type and stack trace (up to
+  `traceDepth` frames) and records it against the current request context.
+- Messages below the configured `logLevel` are skipped.
+
 ## Configuration
 
 Configure the module under the `serverLog` key in `nuxt.config.ts`:
